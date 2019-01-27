@@ -1,3 +1,10 @@
 {
-  "extends": ["standard", "standard-react"]
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react"],
+  "rules": {
+    "react/prop-types": [
+      "enabled",
+      { "ignore": "ignore", "customValidators": "customValidator" }
+    ]
+  }
 }
