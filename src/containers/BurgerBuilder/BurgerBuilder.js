@@ -28,10 +28,12 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: 4,
-    purchaseable: false
+    purchaseable: false,
+    purchasing: false
   }
 
   updatePurchaseState (ingredients) {
+    // console.log(this.setState)
     const sum = Object.values(ingredients).reduce((sum, item) => {
       return sum + item
     }, 0)
@@ -68,6 +70,16 @@ class BurgerBuilder extends Component {
     }
   }
 
+  // FAIL, "this.setState" not in BuildControls (which the component I passed this method)
+  // purchaseHander () {
+  //   this.setState({ purchasing: true })
+  // }
+
+  // Worked ! modify this method to arrow function
+  purchaseHander = () => {
+    this.setState({ purchasing: true })
+  }
+
   render () {
     const disabledInfo = {
       ...this.state.ingredients
@@ -78,7 +90,7 @@ class BurgerBuilder extends Component {
 
     return (
       <>
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
@@ -87,6 +99,7 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           purchaseable={this.state.purchaseable}
+          ordered={this.purchaseHander}
           disabled={disabledInfo} />
       </>
     )
