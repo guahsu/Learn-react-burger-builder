@@ -1,6 +1,6 @@
 import React from 'react'
 
-// import classes from './modal.module.css'
+import Button from '../../UI/Button/Button'
 
 const orderSummary = props => {
   const ingredientSummary = Object.keys(props.ingredients)
@@ -20,6 +20,16 @@ const orderSummary = props => {
         {ingredientSummary}
       </ul>
       <p>Continue to Checkout ?</p>
+      <Button
+        buttonType='Danger'
+        clicked={props.purchaseCancel} >
+        CANCEL
+      </Button>
+      <Button
+        buttonType='Success'
+        clicked={props.purchaseContinue} >
+        CONTINUE
+      </Button>
     </>
   )
 }
