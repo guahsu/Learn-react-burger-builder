@@ -8,7 +8,7 @@ const sideDrawer = props => {
   //
   return (
     <div className={classes.SideDrawer}>
-      <Logo height='11%' />
+      <Logo customClass={classes.Logo} />
       <nav>
         <NavigationItems />
       </nav>
