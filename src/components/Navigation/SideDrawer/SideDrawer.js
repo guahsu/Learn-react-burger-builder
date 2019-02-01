@@ -15,7 +15,7 @@ const sideDrawer = props => {
     <>
       <Backdrop
         show={props.open}
-        clicked={props.closed} />
+        clicked={props.drawerToggleClicked} />
       <div className={attachedClasses.join(' ')}>
         <Logo customClass={classes.Logo} />
         <nav>
