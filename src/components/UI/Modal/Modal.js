@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import Backdrop from '../Backdrop/Backdrop'
 import classes from './modal.module.css'
 
-class Modal extends Component {
-  shouldComponentUpdate (nextProps, nextState) {
-    return nextProps.show !== this.props.show
-  }
+class Modal extends PureComponent {
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   return nextProps.show !== this.props.show
+  // }
 
   componentWillUpdate () {
     console.log('[Modal] in componentWillUpdate')
