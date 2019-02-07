@@ -95,7 +95,13 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    this.props.history.push('/checkout')
+    const queryString = '?' + Object.keys(this.state.ingredients)
+      .map(key => `${encodeURIComponent(key)}=${this.state.ingredients[key]}`)
+      .join('&')
+    this.props.history.push({
+      pathname: '/checkout',
+      search: queryString
+    })
     // window.alert('You Continue !')
     // this.setState({ loading: true })
     // const order = {
