@@ -36,7 +36,6 @@ class ContactData extends Component {
 
     axios.post('/orders.json', order)
       .then(res => {
-        // console.log(res)
         this.setState({ loading: false })
         window.alert('Success to Created Order')
         this.props.history.push('/')
