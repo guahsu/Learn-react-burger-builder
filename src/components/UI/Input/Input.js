@@ -17,7 +17,6 @@ const input = props => {
           className={classes.InputElement}
           value={props.value}
           onChange={props.changed}>
-          <option value='' selected disabled>Select Delivery Method</option>
           {props.elementConfig.options.map(option => (
             <option
               value={option.value}
