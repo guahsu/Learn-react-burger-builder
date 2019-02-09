@@ -8,19 +8,40 @@ const input = props => {
       inputElement = <input
         className={classes.InputElement}
         {...props.elementConfig}
-        value={props.value} />
+        value={props.value}
+        onChange={props.changed} />
+      break
+    case 'select':
+      inputElement = (
+        <select
+          className={classes.InputElement}
+          value={props.value}
+          onChange={props.changed}>
+          <option value='' selected disabled>Select Delivery Method</option>
+          {props.elementConfig.options.map(option => (
+            <option
+              value={option.value}
+              key={option.value}>
+              {option.displayValue}
+            </option>
+          ))}
+          <option />
+        </select>
+      )
       break
     case 'textarea':
       inputElement = <textarea
         className={classes.InputElement}
         {...props.elementConfig}
-        value={props.value} />
+        value={props.value}
+        onChange={props.changed} />
       break
     default:
       inputElement = <input
         className={classes.InputElement}
         {...props.elementConfig}
-        value={props.value} />
+        value={props.value}
+        onChange={props.changed} />
   }
   return (
     <div className={classes.Input}>
