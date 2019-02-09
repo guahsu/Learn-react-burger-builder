@@ -57,7 +57,7 @@ class ContactData extends Component {
             { value: 'cheapest', displayValue: 'Cheapest' }
           ]
         },
-        value: ''
+        value: 'fastest'
       }
     },
     loading: false
@@ -66,9 +66,16 @@ class ContactData extends Component {
   orderHandler = (event) => {
     event.preventDefault()
     this.setState({ loading: true })
+    const formData = Object.keys(this.state.orderForm)
+      .reduce((data, key) => {
+        data[key] = this.state.orderForm[key].value
+        return data
+      }, {})
+
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.totalPrice
+      price: this.props.totalPrice,
+      orderData: formData
     }
 
     axios.post('/orders.json', order)
@@ -107,9 +114,9 @@ class ContactData extends Component {
       )
     })
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElements}
-        <Button buttonType='Success' clicked={this.orderHandler}>ORDER</Button>
+        <Button buttonType='Success'>ORDER</Button>
       </form>
     )
     if (this.state.loading) {
