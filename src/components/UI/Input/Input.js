@@ -3,10 +3,12 @@ import classes from './Input.module.css'
 
 const input = props => {
   let inputElement = null
+  let validationError = null
   const inputClasses = [classes.InputElement]
 
-  if (props.invalid && props.shouldValidate) {
+  if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid)
+    validationError = <p className={classes.ValidationError}>Please enter a valid value</p>
   }
 
   switch (props.elementType) {
@@ -54,6 +56,7 @@ const input = props => {
         {props.label}
       </label>
       {inputElement}
+      {validationError}
     </div>
   )
 }
