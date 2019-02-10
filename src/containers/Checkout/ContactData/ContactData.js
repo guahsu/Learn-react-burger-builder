@@ -87,6 +87,7 @@ class ContactData extends Component {
         value: 'fastest'
       }
     },
+    formIsValid: false,
     loading: false
   }
 
@@ -142,7 +143,15 @@ class ContactData extends Component {
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
     updatedFormElement.touched = true
     updatedOrderForm[inputIdentifier] = updatedFormElement
-    this.setState({ orderForm: updatedOrderForm })
+
+    const formIsValid = Object.keys(updatedOrderForm).every(key => {
+      return updatedOrderForm[key].validation ? updatedOrderForm[key].valid : true
+    })
+
+    this.setState({
+      orderForm: updatedOrderForm,
+      formIsValid
+    })
   }
 
   render () {
@@ -162,7 +171,11 @@ class ContactData extends Component {
     let form = (
       <form onSubmit={this.orderHandler}>
         {formElements}
-        <Button buttonType='Success'>ORDER</Button>
+        <Button
+          buttonType='Success'
+          disabled={!this.state.formIsValid} >
+          ORDER
+        </Button>
       </form>
     )
     if (this.state.loading) {
