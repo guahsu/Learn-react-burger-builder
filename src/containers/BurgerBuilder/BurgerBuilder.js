@@ -19,8 +19,8 @@ class BurgerBuilder extends Component {
 
   // modern way
   state = {
-    purchaseable: false,
     purchasing: false,
+    loading: false,
     error: false
   }
 
@@ -39,7 +39,7 @@ class BurgerBuilder extends Component {
     const sum = Object.values(ingredients).reduce((sum, item) => {
       return sum + item
     }, 0)
-    this.setState({ purchaseable: sum > 0 })
+    return sum > 0
   }
 
   // FAIL, "this.setState" not in BuildControls (which the component I passed this method)
@@ -57,17 +57,12 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    const queryString = '?' + Object.keys(this.props.ingredients)
-      .map(key => `${encodeURIComponent(key)}=${this.props.ingredients[key]}`)
-      .join('&')
-    this.props.history.push({
-      pathname: '/checkout',
-      search: queryString + `&price=${this.props.totalPrice}`
-    })
+    this.props.history.push('/checkout')
     // window.alert('You Continue !')
   }
 
   render () {
+    // @TODO: use Array.some()
     const disabledInfo = {
       ...this.props.ingredients
     }
@@ -88,7 +83,7 @@ class BurgerBuilder extends Component {
           price={this.props.totalPrice}
           ingredientAdded={this.props.onIngredientAdded}
           ingredientRemoved={this.props.onIngredientRemoved}
-          purchaseable={this.state.purchaseable}
+          purchaseable={this.updatePurchaseState(this.props.ingredients)}
           ordered={this.purchaseHander}
           disabled={disabledInfo} />
       </>
